@@ -1,6 +1,7 @@
 body, p, h1, ul, li, blockquote {
     padding: 0;
     margin: 0;
+    animation: appear .9s ease-in-out;
 }
 body {
     font-family: 'Vollkorn', Georgia, serif;
@@ -12,7 +13,19 @@ a {
     text-decoration: none;
 }
 img {
-    max-width: 100%;
+    width: 100%;
+    display: block;
+    border-radius: 5px;
+}
+@keyframes appear {
+    from {
+        opacity: 0;
+        margin-top: 32px;
+    }
+    to {
+        opacity: 1;
+        margin-top: 0px;
+    }
 }
 // Grid geral
 .estrutura {
@@ -37,33 +50,242 @@ img {
     nav ul {
         display: flex;
         flex-wrap: wrap;
-    }
-    nav a {
-        display: block;
-        padding: 10px;
-        color: #fff;
-        font-size: 1.125em;
-        background: rgba(0, 0, 0, 0.1);
-        border-radius: 5px;
-        transition: 0.1s;
-        &:hover {
-            background: rgba(0, 0, 0, 0.5);
+        a {
+            display: block;
+            padding: 10px;
+            color: #fff;
+            font-size: 1.125em;
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            transition: 0.1s;
+            &:hover {
+                background: rgba(0, 0, 0, 0.5);
+                scale: 1.1;
+            }
         }
-    }
-    nav li + li {
-        margin-left: 30px;
+        li + li {
+            margin-left: 30px;
+        }
     }
 
 }
+// Sidenav
 .sidenav {
     grid-area: sidenav;
+    background-color: #fafbfc;
+    padding: 30px;
+    li a {
+        display: block;
+        min-width: 60px;
+        max-width: 100px;
+        margin: 0 auto 30px auto;
+        background-color: white;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 5px 5px 15px 0px rgba(44,44,44,0.15);
+        transition: .1s ease-out;
+        &:hover {
+            background-color: #b07dfb;
+            scale: 1.1;
+        }
+    }
 }
+// Content
 .content {
     grid-area: content;
+    background: #fafbfc;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 30px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    .col-wide {
+        grid-column: 1 / -1;
+    }
+    .imagem-1 {
+        grid-row: span 2;
+        align-self: end;
+    }
+    .imagem-2 {
+        align-self: end;
+    }
+    .imagem-3 {
+        grid-column: 1 / -1;
+    }
+    .titulo {
+        color: #b07dfb;
+    }
+    .titulo h1 {
+        font-size: 3.75rem;
+        line-height: 1;
+        font-weight: 700;
+    }
+    .titulo span {
+        font-size: 0.875rem;
+        font-style: italic;
+    }
+    .caracteristicas {
+        display: flex;
+        align-items: flex-start;
+        > div {
+            width: 80px;
+            text-align: center;
+            background: linear-gradient(135deg, #8844ee, #b07dfb);
+            border-radius: 5px;
+            box-shadow: 5px 5px 15px 0px rgba(44,44,44,0.15);
+            position: relative;
+            &:first-child {
+                margin-right: 30px;
+            }
+            span {
+                display: block;
+            }
+            .numero {
+                color: #b07dfb;
+                font-size: 3rem;
+                line-height: 1;
+                margin: 10px auto;
+            }
+            .rotulo {
+                background-color: white;
+                border-radius: 0 0 5px 5px;
+                padding: 5px 0;
+                position: relative;
+                top: 2px;
+            }
+        }
+    }
+    .informacoes p + p {
+        margin-top: 30px;
+    }
+    .destaque {
+        font-size: 0.875em;
+        color: #b07dfb;
+        max-width: 16em;
+    }
+    .citacao, 
+    .atributos {
+        padding: 30px;
+        border-radius: 5px;
+        box-shadow: 5px 5px 15px 0px rgba(44,44,44,0.15);
+        background: linear-gradient(135deg, #8844ee, #b07dfb);
+    }
+    .citacao {
+        p {
+            font-size: 1.5em;
+            font-style: italic;
+            text-align: center;
+            max-width: 500px;
+            margin: 0 auto;
+            color: #fff;
+        }
+    }
+    .atributos {
+        align-self: start;
+        li {
+            color: white;
+            font-family: Courier, monospace;
+            font-size: 1.125em;
+            padding: 15px;
+            border-bottom: 2px solid #b07dfb;
+            &:last-child {
+                border-bottom: none;
+            }
+        }
+    }
 }
+// Estilos Content
+p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    letter-spacing: -0.005em;
+    color: rgba(0, 0, 0, .7);
+}
+// Anuncios
 .anuncios {
     grid-area: anuncios;
+    background: #fafbfc;
+    display: grid;
+    align-content: start;
+    padding: 30px;
+    gap: 30px;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
 }
+// Footer
 .footer {
     grid-area: footer;
+    background: linear-gradient(135deg, #8844ee, #b07dfb);
+    P {
+        color: white;
+        text-align: center;
+        padding: 30px;
+    }
+}
+@media (max-width: 1200px) {
+    .estrutura {
+        grid-template-columns: auto;
+        grid-template-areas: 'header header'
+                             'sidenav content'
+                             'sidenav anuncios'
+                             'footer footer';
+    }
+}
+@media (max-width: 760px) {
+    .header {
+        grid-template-columns: auto;
+        .logo {
+            margin-bottom: 20px;
+        }
+        nav {
+            li {
+                +li {
+                margin-left: 10px;
+                }
+                a {
+                    font-size: 1em;
+                }
+            }
+        }
+    }
+    @keyframes seta {
+        from {right: 30px;}
+        to {right: 20px;}
+    }
+    .sidenav {
+        position: relative;
+        padding: 0 30px;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        -ms-overflow-style: -ms-autohiding-scrollbar;
+        &::after {
+            content: '→';
+            position: absolute;
+            top: 5px;
+            height: 30px;
+            color: rgba(0, 0, 0, .3);
+            animation: seta .5s ease-in infinite alternate;
+        }
+        ul {
+            display: flex;
+            li {
+                flex: 1 0 60px;
+                a {
+                    margin: 30px 30px 30px 0;
+                }
+            }
+        }
+    }
+    .estrutura {
+        grid-template-areas: 'header'
+                             'sidenav'
+                             'content'
+                             'anuncios'
+                             'footer';
+    }
+}
+@media (max-width: 600px) {
+    .content {
+        grid-template-columns: auto;
+    }
 }
