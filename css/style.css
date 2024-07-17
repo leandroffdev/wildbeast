@@ -61,7 +61,7 @@ img {
   font-size: 1.125em;
   background: rgba(0, 0, 0, 0.1);
   border-radius: 5px;
-  transition: 0.1s;
+  transition: 0.5s;
 }
 .header nav ul a:hover {
   background: rgba(0, 0, 0, 0.5);
@@ -85,7 +85,7 @@ img {
   padding: 20px;
   border-radius: 5px;
   box-shadow: 5px 5px 15px 0px rgba(44, 44, 44, 0.15);
-  transition: 0.1s ease-out;
+  transition: 0.3s ease-out;
 }
 .sidenav li a:hover {
   background-color: #b07dfb;
